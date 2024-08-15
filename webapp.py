@@ -9,7 +9,7 @@ conn = sqlite3.connect('trade.db')
 cursor = conn.cursor()
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS signals (
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, 
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         ticker,
         order_action,
         order_contracts,
@@ -42,16 +42,16 @@ def webhook():
 
     if data:
         r.publish('tradingview', data)
-
+        print(data)
         data_dict = request.json
 
         db = get_db()
         cursor = db.cursor()
         cursor.execute("""
-            INSERT INTO signals (ticker, order_action, order_contracts, order_price) 
+            INSERT INTO signals (ticker, order_action, order_contracts, order_price)
             VALUES (?, ?, ?, ?)
-        """, (data_dict['ticker'], 
-                data_dict['strategy']['order_action'], 
+        """, (data_dict['ticker'],
+                data_dict['strategy']['order_action'],
                 data_dict['strategy']['order_contracts'],
                 data_dict['strategy']['order_price']))
 

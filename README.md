@@ -5,30 +5,40 @@ TradingView Interactive Brokers Integration using Webhooks
 
 https://www.youtube.com/watch?v=zsYKfzCNPPU
 
-## Support My Work
-
-__Visit Interactive Brokers__
-
-https://www.interactivebrokers.com/mkt/?src=ptlg&url=%2Fen%2Findex.php%3Ff%3D1338
-
-__Buy Me a Coffee__
-
-https://buymeacoffee.com/parttimelarry
-
-## Diagram 
-
-![Diagram](diagram.png)
-
 ## Prerequisites
 
 * Requires redis, Python3, and packages installed
 
 ```
 pip3 install -r requirements.txt
+```
 
+## Install Redis
+
+```
+brew install redis
+brew servies start redis
+ps aux | grep redis
+```
+
+## Start
+Run Flask
+
+```
 export FLASK_APP=webapp
 export FLASK_ENV=development
 flask run
+```
+
+Run ngrok for global access
+```
+ngrok http 5000
+ngrok http --domain=<static domain> 5000
+```
+
+Run broker deamon
+```
+python broker.py
 ```
 
 ## References, Tools, and Libraries Used:
